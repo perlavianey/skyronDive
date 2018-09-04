@@ -15,13 +15,15 @@ var images = {
     chinicuil:'./images/chinicuil.png',
     nopal:'./images/nopal.png',
     ave:'./images/bird.png',
-    avion:'',
+    avion:'./images/plane.png'
 }
 var audios = {
     game:'./audio/gameMusic.mp3',
     goodCrash:'./audio/take.mp3',
-    badCrash:'./audio/wah.mp3'
+    badCrash:'./audio/wah.mp3',
+    planeCrash:'./audio/planeCrash.mp3'
 }
+
 var calcetas1=[];
 var calcetas2=[];
 var flores1=[];
@@ -32,6 +34,8 @@ var nopales1=[];
 var nopales2=[];
 var aves1=[];
 var aves2=[];
+var aviones1=[];
+var aviones2=[];
 var puntaje1=0;
 var puntaje2=0;
 
@@ -110,6 +114,11 @@ class Man1{
                 audio.src = audios.goodCrash
                 audio.play()
             }
+            else if(es === 'avion'){
+                var audio = new Audio()
+                audio.src = audios.planeCrash
+                audio.play()
+            }
             else{
                 var audio = new Audio()
                 audio.src = audios.badCrash
@@ -147,6 +156,11 @@ class Man2{
             if(es == 'flor'|| es == 'calcetin'|| es == 'chinicuil'){
                 var audio = new Audio()
                 audio.src = audios.goodCrash
+                audio.play()
+            }
+            else if(es === 'avion'){
+                var audio = new Audio()
+                audio.src = audios.planeCrash
                 audio.play()
             }
             else{
@@ -307,9 +321,9 @@ class Nopal2{
 }
 
 class Bird1{
-    constructor(x){
-        this.x = x
-        this.y = 650
+    constructor(y){
+        this.x = 0
+        this.y = y
         this.width = 35
         this.height = 35
         this.image = new Image()
@@ -319,15 +333,15 @@ class Bird1{
         }
     }
     draw(){
-        this.y-=2;
+        this.x+=2;
         ctx1.drawImage(this.image,this.x,this.y,this.width,this.height)
     }
 }
 
 class Bird2{
     constructor(x){
-        this.x = x
-        this.y = 650
+        this.x = 0
+        this.y = y
         this.width = 35
         this.height = 35
         this.image = new Image()
@@ -337,7 +351,43 @@ class Bird2{
         }
     }
     draw(){
-        this.y-=2;
+        this.x+=2;
+        ctx2.drawImage(this.image,this.x,this.y,this.width,this.height)
+    }
+}
+
+class Plane1{
+    constructor(y){
+        this.x = 650
+        this.y = y
+        this.width = 45
+        this.height = 30
+        this.image = new Image()
+        this.image.src = images.avion
+        this.image.onload = () =>{
+            this.draw()
+        }
+    }
+    draw(){
+        this.x-=4;
+        ctx1.drawImage(this.image,this.x,this.y,this.width,this.height)
+    }
+}
+
+class Plane2{
+    constructor(y){
+        this.x = 650
+        this.y = y
+        this.width = 35
+        this.height = 25
+        this.image = new Image()
+        this.image.src = images.avion
+        this.image.onload = () =>{
+            this.draw()
+        }
+    }
+    draw(){
+        this.x-=4;
         ctx2.drawImage(this.image,this.x,this.y,this.width,this.height)
     }
 }
@@ -395,11 +445,17 @@ var man2 = new Man2()
     if(checkAves1()) ctx1.fillText('Score: ' + puntaje1,400,25)
     if(checkAves2()) ctx2.fillText('Score: ' + puntaje2,400,25)
 
+    generateAviones1()
+    generateAviones2()
+    drawAviones1()
+    drawAviones2()
+    if(checkAviones1()) ctx1.fillText('Score: ' + puntaje1,400,25)
+    if(checkAviones2()) ctx2.fillText('Score: ' + puntaje2,400,25)
+
     if (timer() === 60){
         gameOver()
         document.getElementById('winner').innerHTML = getWinner()
     }
-
 }
 
 function start(){
@@ -415,6 +471,10 @@ function start(){
     chinicuiles2=[];
     nopales1=[];
     nopales2=[];
+    aves1=[];
+    aves2=[];
+    aviones1=[];
+    aviones2=[];
     puntaje1=0;
     puntaje2=0;
 }
@@ -622,7 +682,7 @@ function generateAves1(){
     if (frames % 120 === 0){
         var equis = Math.floor(Math.random() * 450)
         var ave1 = new Bird1(equis)
-        nopales1.push(ave1)
+        aves1.push(ave1)
     }
 }
 
@@ -662,6 +722,55 @@ function checkAves2(){
             var pos = aves2.indexOf(c2);
             aves2.splice(pos, 1);
             puntaje2 = puntaje2 -5;
+        }
+    }) 
+}
+
+//AVIONES
+function generateAviones1(){
+    if (frames % 700 === 0){
+        var equis = Math.floor(Math.random() * 450)
+        var avion1 = new Plane1(equis)
+        aviones1.push(avion1)
+    }
+}
+
+function generateAviones2(){
+    if (frames % 700 === 0){
+        var equis = Math.floor(Math.random() * 450)
+        var avion2 = new Plane2(equis)
+        aviones2.push(avion2)
+    }
+}
+
+function drawAviones1(equis){
+    aviones1.forEach(function(avion){
+        avion.draw()
+    })
+}
+
+function drawAviones2(equis){
+    aviones2.forEach(function(avion){
+        avion.draw()
+    })
+}
+
+function checkAviones1(){
+    aviones1.forEach(function(c1){
+        if(man1.crashWith(c1,'avion') === true){
+            var pos = aviones1.indexOf(c1);
+            aviones1.splice(pos, 1);
+            puntaje1 = puntaje1 - 20;
+        }
+    }) 
+}
+
+function checkAviones2(){
+    aviones2.forEach(function(c2){
+        if(man2.crashWith(c2,'avion') === true){
+            var pos = aviones2.indexOf(c2);
+            aviones2.splice(pos, 1);
+            puntaje2 = puntaje2 - 20;
         }
     }) 
 }
@@ -712,16 +821,31 @@ addEventListener('keydown',function(e){ //recibe un evento (e)
         start()
     }
     
+    //Controles para el jugador 1
     if(e.keyCode===65 && man1.x > 10){
         man1.x -=25;
     }
     if(e.keyCode===68 && man1.x < 450){
         man1.x +=25;
     }
+    if(e.keyCode===87 && man1.y > 10){
+        man1.y -=25;
+    }
+    if(e.keyCode===83 && man1.y < 450){
+        man1.y +=25;
+    }
+
+    //Controles para el jugador 2
     if(e.keyCode===37 && man2.x > 10){
         man2.x -=25;
     }
     if(e.keyCode===39 && man2.x < 450){
         man2.x +=25;
+    }
+    if(e.keyCode===38 && man2.y > 10){
+        man2.y -=25;
+    }
+    if(e.keyCode===40 && man2.y < 450){
+        man2.y +=25;
     }
 })
