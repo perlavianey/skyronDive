@@ -1,0 +1,53 @@
+*{
+    font-family: 'VT323', monospace;
+}
+
+body{
+    margin: 0;
+    background-image: url('./cart.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header{
+    background-color:rgb(245, 245, 127);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    color:black;
+    font-size: 40px;
+    letter-spacing: 15px;
+}
+
+section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#c1{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 50%;
+}
+
+#canvas1{
+    border: 1px solid black;
+    margin: 1%;
+}
+
+#c2{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width:50%;
+}
+
+#canvas2{
+    border: 1px solid black;
+    margin: 1%;
+}
