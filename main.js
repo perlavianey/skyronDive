@@ -21,7 +21,8 @@ var audios = {
     game:'./audio/gameMusic.mp3',
     goodCrash:'./audio/take.mp3',
     badCrash:'./audio/wah.mp3',
-    planeCrash:'./audio/planeCrash.mp3'
+    planeCrash:'./audio/planeCrash.mp3',
+    end:'./audio/end.mp3'
 }
 
 var calcetas1=[];
@@ -40,6 +41,7 @@ var puntaje1=0;
 var puntaje2=0;
 
 var audioFondo = new Audio() //Audio de fondo
+var audioFin = new Audio()
 
 //CLASES
 class Board1{
@@ -62,6 +64,10 @@ class Board1{
         ctx1.font = '20px VT323'
         ctx1.fillStyle='black'
         ctx1.fillText('Score: '+ puntaje1,400,25)
+
+        ctx1.font = '20px VT323'
+        ctx1.fillStyle='black'
+        ctx1.fillText('Time: '+ timer(),400,40)
     }
 }
 
@@ -85,6 +91,10 @@ class Board2{
         ctx2.font = '20px VT323'
         ctx2.fillStyle='black'
         ctx2.fillText('Score: '+puntaje2,400,25)
+
+        ctx2.font = '20px VT323'
+        ctx2.fillStyle='black'
+        ctx2.fillText('Time: '+ timer(),400,40)
     }
 }
 
@@ -339,7 +349,7 @@ class Bird1{
 }
 
 class Bird2{
-    constructor(x){
+    constructor(y){
         this.x = 0
         this.y = y
         this.width = 35
@@ -413,8 +423,10 @@ var man2 = new Man2()
     generateSocks2()
     drawSocks1()
     drawSocks2()
-    if(checkSocks1()) ctx1.fillText('Score: ' + puntaje1,400,25)
-    if(checkSocks2()) ctx2.fillText('Score: ' + puntaje2,400,25)
+    checkSocks1()
+    checkSocks2()
+    //if(checkSocks1()) ctx1.fillText('Score: ' + puntaje1,400,25)
+    //if(checkSocks2()) ctx2.fillText('Score: ' + puntaje2,400,25)
     
     generateFlowers1()
     generateFlowers2()
@@ -449,10 +461,18 @@ var man2 = new Man2()
     generateAviones2()
     drawAviones1()
     drawAviones2()
+    
     if(checkAviones1()) ctx1.fillText('Score: ' + puntaje1,400,25)
     if(checkAviones2()) ctx2.fillText('Score: ' + puntaje2,400,25)
 
-    if (timer() === 60){
+    if (timer() === 10){
+        audioFondo.playbackRate = 1.5;
+    }
+
+    if (timer() === 0){
+        audioFin.defaultPlaybackRate = 2;
+        audioFin.src = audios.end
+        audioFin.play()
         gameOver()
         document.getElementById('winner').innerHTML = getWinner()
     }
@@ -777,8 +797,8 @@ function checkAviones2(){
 
 function timer(){
     var tiempo = Math.floor(frames/60)
-    document.getElementById('timer').innerHTML = tiempo;
-    return tiempo
+    document.getElementById('timer').innerHTML = 60-tiempo;
+    return 60-tiempo
 }
 
 function gameOver(){

@@ -4,19 +4,20 @@
 
 body{
     margin: 0;
-    background-image: url('./images/cart.jpg');
+    background-image: url('./images/cart2.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 header{
-    background-color:rgb(245, 245, 127);
+    background-color:rgba(255, 0, 0, 0.699);
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 h1{
-    color:black;
+    color:white;
     font-size: 40px;
     letter-spacing: 15px;
 }
@@ -52,6 +53,10 @@ section{
     margin: 1%;
 }
 
+#t{
+    color:black;
+}
+
 #time{
     display: flex;
     flex-direction: column;
@@ -69,7 +74,9 @@ section{
     text-align: center;
     font-weight: bold;
 }
+
 #enter{
+    text-align: center;
     font-size: 30px;
     animation-name: parpadeo;
     animation-duration: 0.5s;
@@ -151,4 +158,41 @@ section{
     }  
   }
   
- 
+ #players{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10%;
+    
+ }
+  
+ .c{
+    border: 3px solid black;
+    background-color: dodgerblue;
+    font-size: 70px;
+    text-align: center;
+    padding: 20px;
+    margin: 10%;
+    border-radius: 15px;
+    box-shadow: 0 10px 2px rgba(0,0,0,.2);
+    
+ }
+
+ .c a{
+    text-decoration: none;
+    color:white;
+    
+ }
+
+ .c:hover{
+    background-color:purple;
+    border-bottom: 4px solid black; 
+    border-top: 4px solid black; 
+    border-right: 4px solid black; 
+    border-left: 4px solid black; 
+    cursor:pointer;
+ }
+
+ #title{
+     padding:40px;
+ }
