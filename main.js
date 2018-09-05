@@ -797,7 +797,6 @@ function checkAviones2(){
 
 function timer(){
     var tiempo = Math.floor(frames/60)
-    document.getElementById('timer').innerHTML = 60-tiempo;
     return 60-tiempo
 }
 

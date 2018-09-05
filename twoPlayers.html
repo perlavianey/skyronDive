@@ -10,21 +10,26 @@
 </head>
 <body>
     <header>
-        <h1>The SkyronDive Game</h1>
+        <h1 id="main2">The SkyronDive Game</h1>
     </header>
-    <section>
+    <section id="padre">
         <section id="c1">
-            <canvas id="canvas1" width="500" height="700"></canvas>
+            <h3>Player1</h3>
+            <canvas id="canvas1" width="500" height="600"></canvas>
         </section>
         <section id="time">
-            <h1 id="t">Time</h1>
-            <h2 id="timer">0</h2>
+            <p>Instructions</p>
+            <p>Take:</p>
+            <img src="./images/good.png" alt="">
+            <p>Don't touch:</p>
+            <img src="./images/bad.png" alt="">
             <p id="over"></p>
             <p id="enter"></p>
             <p id="winner"></p>
         </section>
-        <section id="c2">     
-            <canvas id="canvas2" width="500" height="700"></canvas>
+        <section id="c2">  
+            <h3>Player2</h3>   
+            <canvas id="canvas2" width="500" height="600"></canvas>
         </section>
     </section>
     <script src="main.js"></script>
