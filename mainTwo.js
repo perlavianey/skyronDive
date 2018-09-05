@@ -522,7 +522,7 @@ var man2 = new Man2()
         audioFondo.playbackRate = 1.8;
     }
 
-    if (timer() === 50){
+    if (timer() === 0){
         audioFin.defaultPlaybackRate = 2;
         audioFin.src = audios.end
         audioFin.play()
