@@ -17,7 +17,8 @@ var images = {
     nopal:'./images/nopal.png',
     ave1:'./images/bird.png',
     ave2:'./images/bird2.png',
-    avion:'./images/plane.png'
+    avion:'./images/plane.png',
+    trophy:'./images/trophy.png'
 }
 var audios = {
     game:'./audio/gameMusic.mp3',
@@ -58,6 +59,8 @@ class Board1{
         this.image.onload = () => {
             this.draw()
         }
+        this.win = new Image ()
+        this.win.src = images.trophy
     }
     draw(){
         this.y-=1.5
@@ -75,6 +78,10 @@ class Board1{
         }
         ctx1.fillText('Time: '+ timer(),385,55)
     }
+
+    drawWinner(){
+        ctx1.drawImage(this.win,85,60,330,500)
+    }
 }
 
 class Board2{
@@ -88,6 +95,8 @@ class Board2{
         this.image.onload = () => {
             this.draw()
         }
+        this.win = new Image ()
+        this.win.src = images.trophy
     }
     draw(){
         this.y-=1.5
@@ -104,6 +113,9 @@ class Board2{
             ctx2.fillStyle = 'rgb(209, 19, 19)'
         }
         ctx2.fillText('Time: '+ timer(),385,55)
+    }
+    drawWinner(){
+        ctx2.drawImage(this.win,85,60,330,500)
     }
 }
 
@@ -510,7 +522,7 @@ var man2 = new Man2()
         audioFondo.playbackRate = 1.8;
     }
 
-    if (timer() === 0){
+    if (timer() === 50){
         audioFin.defaultPlaybackRate = 2;
         audioFin.src = audios.end
         audioFin.play()
@@ -857,9 +869,11 @@ function gameOver(){
 function getWinner(){
     var winner;
     if(puntaje1 > puntaje2){
+        tablero1.drawWinner()
         return 'Player 1 won'
     }
     else if(puntaje2 > puntaje1){
+        tablero2.drawWinner()
         return 'Player2 won'
     }
     else{
