@@ -29,7 +29,6 @@ body{
     animation: move linear 2000ms infinite;  
 }
 
-
 #padre{
     display: flex;
     flex-direction: row;
@@ -48,7 +47,6 @@ body{
     font-size: 30px;
     margin-bottom: 0;
     color:brown;
-    
 }
 
 img{
@@ -59,7 +57,7 @@ img{
 }
 
 #canvas1{
-    border: 1px solid black;
+    border: 3px solid black;
     margin: 1%;
     align-self: center;
 }
@@ -78,7 +76,7 @@ img{
 }
 
 #canvas2{
-    border: 1px solid black;
+    border: 3px solid black;
     margin: 1%;
     align-self: center;
 }
@@ -244,3 +242,60 @@ img{
  #title{
      padding:30px;
  }
+
+ #padreOne{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+ }
+
+ #mainOne{
+    text-align: center;
+    font-size: 60px;
+    margin:30px;
+    padding-top: 5px;
+    color:navy;
+    animation: move linear 2000ms infinite;  
+ }
+
+ #canvasUnico{
+    border: 3px solid black;
+    margin: 5%;
+    align-self: center;
+ }
+
+ #time2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:20%;
+    height: 550px;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+#time2 p:first-child{
+    font-size: 30px;
+    margin-bottom: 10px;
+    color:red;
+    text-transform: uppercase;
+}
+
+#time2 p{
+    margin:0;
+    font-size: 25px;
+}
+
+#cOne{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+#cOne h3{
+    align-self: center;
+    font-size: 30px;
+    margin-bottom: 0;
+    color:brown;
+}
