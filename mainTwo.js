@@ -12,9 +12,11 @@ var images = {
     man:'./images/man.png',
     calceta:'./images/sock.png',
     flor:'./images/flower.png',
-    chinicuil:'./images/chinicuil.png',
+    chinicuil1:'./images/chinicuil1.png',
+    chinicuil2:'./images/chinicuil2.png',
     nopal:'./images/nopal.png',
-    ave:'./images/bird.png',
+    ave1:'./images/bird.png',
+    ave2:'./images/bird2.png',
     avion:'./images/plane.png'
 }
 var audios = {
@@ -64,14 +66,14 @@ class Board1{
         ctx1.drawImage(this.image,this.x, this.y + this.height,this.width,this.height)
         ctx1.font = '30px VT323'
         ctx1.fillStyle='black'
-        ctx1.fillText('Score: '+ puntaje1,385,25)
+        ctx1.fillText('Score: '+ puntaje1,375,25)
         ctx1.font = '30px VT323'
         ctx1.fillStyle='black'
         if(timer() < 11){
             ctx1.font = '30px VT323'
             ctx1.fillStyle = 'rgb(209, 19, 19)'
         }
-        ctx1.fillText('Time: '+ timer(),395,55)
+        ctx1.fillText('Time: '+ timer(),385,55)
     }
 }
 
@@ -94,14 +96,14 @@ class Board2{
         ctx2.drawImage(this.image,this.x, this.y + this.height,this.width,this.height)
         ctx2.font = '30px VT323'
         ctx2.fillStyle='black'
-        ctx2.fillText('Score: '+ puntaje2,385,25)
+        ctx2.fillText('Score: '+ puntaje2,375,25)
         ctx2.font = '30px VT323'
         ctx2.fillStyle='black'
         if(timer() < 11){
-            ctx1.font = '30px VT323'
-            ctx1.fillStyle = 'rgb(209, 19, 19)'
+            ctx2.font = '30px VT323'
+            ctx2.fillStyle = 'rgb(209, 19, 19)'
         }
-        ctx2.fillText('Time: '+ timer(),395,55)
+        ctx2.fillText('Time: '+ timer(),385,55)
     }
 }
 
@@ -281,15 +283,22 @@ class Chin1{
         this.y = 650
         this.width = 25
         this.height = 25
-        this.image = new Image()
-        this.image.src = images.chinicuil
-        this.image.onload = () =>{
-            this.draw()
-        }
+        this.image1 = new Image()
+        this.image1.src = images.chinicuil1
+        this.image2 = new Image()
+        this.image2.src = images.chinicuil2
+        this.theImage = this.image1
+
     }
+
     draw(){
+        if (frames % 12 === 0) {
+            if (this.theImage === this.image1) this.theImage = this.image2
+            else this.theImage = this.image1;
+        }
         this.y-=2;
-        ctx1.drawImage(this.image,this.x,this.y,this.width,this.height)
+        this.x-=0.2;
+        ctx1.drawImage(this.theImage,this.x,this.y,this.width,this.height)
     }
 }
 
@@ -299,15 +308,22 @@ class Chin2{
         this.y = 650
         this.width = 25
         this.height = 25
-        this.image = new Image()
-        this.image.src = images.chinicuil
-        this.image.onload = () =>{
-            this.draw()
-        }
+        this.image1 = new Image()
+        this.image1.src = images.chinicuil1
+        this.image2 = new Image()
+        this.image2.src = images.chinicuil2
+        this.theImage = this.image1
+
     }
+
     draw(){
+        if (frames % 12 === 0) {
+            if (this.theImage === this.image1) this.theImage = this.image2
+            else this.theImage = this.image1;
+        }
         this.y-=2;
-        ctx2.drawImage(this.image,this.x,this.y,this.width,this.height)
+        this.x-=0.2;
+        ctx2.drawImage(this.theImage,this.x,this.y,this.width,this.height)
     }
 }
 
@@ -353,15 +369,19 @@ class Bird1{
         this.y = y
         this.width = 35
         this.height = 35
-        this.image = new Image()
-        this.image.src = images.ave
-        this.image.onload = () =>{
-            this.draw()
-        }
+        this.image1 = new Image()
+        this.image1.src = images.ave1
+        this.image2 = new Image()
+        this.image2.src = images.ave2
+        this.theImage = this.image1
     }
     draw(){
+        if (frames % 8 === 0) {
+            if (this.theImage === this.image1) this.theImage = this.image2
+            else this.theImage = this.image1;
+        }
         this.x+=2;
-        ctx1.drawImage(this.image,this.x,this.y,this.width,this.height)
+        ctx1.drawImage(this.theImage,this.x,this.y,this.width,this.height)
     }
 }
 
@@ -371,15 +391,19 @@ class Bird2{
         this.y = y
         this.width = 35
         this.height = 35
-        this.image = new Image()
-        this.image.src = images.ave
-        this.image.onload = () =>{
-            this.draw()
-        }
+        this.image1 = new Image()
+        this.image1.src = images.ave1
+        this.image2 = new Image()
+        this.image2.src = images.ave2
+        this.theImage = this.image1
     }
     draw(){
+        if (frames % 8 === 0) {
+            if (this.theImage === this.image1) this.theImage = this.image2
+            else this.theImage = this.image1;
+        }
         this.x+=2;
-        ctx2.drawImage(this.image,this.x,this.y,this.width,this.height)
+        ctx2.drawImage(this.theImage,this.x,this.y,this.width,this.height)
     }
 }
 
