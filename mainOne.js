@@ -10,19 +10,24 @@ var images = {
     man:'./images/man.png',
     calceta:'./images/sock.png',
     flor:'./images/flower.png',
+    flor2:'./images/flower2.png',
     chinicuil1:'./images/chinicuil1.png',
     chinicuil2:'./images/chinicuil2.png',
     nopal:'./images/nopal.png',
     ave1:'./images/bird.png',
     ave2:'./images/bird2.png',
-    avion:'./images/plane.png'
+    avion:'./images/plane.png',
+    avion2:'./images/plane2.png',
+    controlsP1: './images/controlesP1.png',
+    controlsP2: './images/controlesP2.png'
 }
 var audios = {
     game:'./audio/gameMusic.mp3',
     goodCrash:'./audio/take.mp3',
-    badCrash:'./audio/wah.mp3',
+    badCrash:'./audio/pain3.mp3',
     planeCrash:'./audio/planeCrash.mp3',
     end:'./audio/end.mp3',
+    winner:'./audio/yuhuu.mp3',
     ave:'./audio/ave.mp3',
     avion:'./audio/avion.mp3'
 }
@@ -34,10 +39,11 @@ var nopales1=[];
 var aves1=[];
 var aviones1=[];
 var puntaje1=0;
-
+var puntajes=[]
 
 var audioFondo = new Audio() //Audio de fondo
 var audioFin = new Audio()
+var audioY = new Audio()
 
 //CLASES
 class Board1{
@@ -51,6 +57,8 @@ class Board1{
         this.image.onload = () => {
             this.draw()
         }
+        this.controls = new Image()
+        this.controls.src = images.controlsP2
     }
     draw(){
         this.y-=1.5
@@ -59,15 +67,19 @@ class Board1{
         ctx1.drawImage(this.image,this.x, this.y + this.height,this.width,this.height)
         ctx1.font = '30px VT323'
         ctx1.fillStyle='black'
-        ctx1.fillText('Score: '+ puntaje1,375,25)
+        ctx1.fillText('Score: '+ puntaje1,370,25)
         ctx1.font = '30px VT323'
         ctx1.fillStyle='black'
         if(timer() < 11){
             ctx1.font = '30px VT323'
             ctx1.fillStyle = 'rgb(209, 19, 19)'
         }
-        ctx1.fillText('Time: '+ timer(),385,55)
+        ctx1.fillText('Time: '+ timer(),380,55)
     }
+    drawControls(){
+        ctx1.drawImage(this.controls,150,180,200,200)
+    }
+
 }
 
 class Man1{
@@ -147,15 +159,19 @@ class Flower1{
         this.y = 650
         this.width = 25
         this.height = 25
-        this.image = new Image()
-        this.image.src = images.flor
-        this.image.onload = () =>{
-            this.draw()
-        }
+        this.image1 = new Image()
+        this.image1.src = images.flor
+        this.image2 = new Image()
+        this.image2.src = images.flor2
+        this.theImage = this.image1
     }
     draw(){
+        if (frames % 20 === 0) {
+            if (this.theImage === this.image1) this.theImage = this.image2
+            else this.theImage = this.image1;
+        }
         this.y-=2;
-        ctx1.drawImage(this.image,this.x,this.y,this.width,this.height)
+        ctx1.drawImage(this.theImage,this.x,this.y,this.width,this.height)
     }
 }
 
@@ -233,16 +249,40 @@ class Plane1{
         this.y = y
         this.width = 45
         this.height = 30
-        this.image = new Image()
-        this.image.src = images.avion
-        this.image.onload = () =>{
-            this.draw()
-        }
+        this.image1 = new Image()
+        this.image1.src = images.avion
+        this.image2 = new Image()
+        this.image2.src = images.avion2
+        this.theImage = this.image1
     }
     draw(){
+        if (frames % 2 === 0) {
+            if (this.theImage === this.image1) this.theImage = this.image2
+            else this.theImage = this.image1;
+        }
         this.x-=4;
-        ctx1.drawImage(this.image,this.x,this.y,this.width,this.height)
+        ctx1.drawImage(this.theImage,this.x,this.y,this.width,this.height)
     }
+}
+
+class Puntaje{
+    constructor(p,x,y){
+        this.x = x
+        this.y = y
+        this.p = p
+    }
+    drawPuntaje(){
+        if(this.p > 0){
+            ctx1.font = '20px VT323'
+            ctx1.fillStyle='black'
+            ctx1.fillText(this.p, this.x, this.y)
+        }
+        else{
+            ctx1.font = '20px VT323'
+            ctx1.fillStyle='rgb(209, 19, 19)'
+            ctx1.fillText(this.p, this.x, this.y)
+        }
+    }  
 }
 
 //INSTANCIAS
@@ -256,7 +296,7 @@ var man1 = new Man1()
     ctx1.clearRect(0,0,canvas1.width,canvas1.height)
     tablero1.draw()
     man1.draw()
-    
+    drawPts()
     generateSocks1()
     drawSocks1()
     checkSocks1()
@@ -292,6 +332,11 @@ var man1 = new Man1()
         audioFin.play()
         gameOver()
         document.getElementById('winner').innerHTML = 'Score: ' + puntaje1;
+        
+        setTimeout(function(){ 
+            audioY.src = audios.winner
+            audioY.play()
+        }, 1800);
     }
 }
 
@@ -311,6 +356,20 @@ function start(){
     man1.x = 250
     man1.y = 100
 }
+function generatePts(p, x, y){
+    var pts = new Puntaje(p,x,y)
+    puntajes.push(pts)
+}
+
+function drawPts(){
+    puntajes.forEach(function(p, i){
+        p.drawPuntaje()
+        setTimeout(function(){
+            puntajes.splice(i,1)
+        }, 300)
+    })
+}
+
 
 //CALCETINES
 function generateSocks1(){
@@ -334,6 +393,7 @@ function checkSocks1(){
             var pos = calcetas1.indexOf(c1);
             calcetas1.splice(pos, 1);
             puntaje1 = puntaje1 + 2;
+            generatePts('+2',man1.x+23, man1.y-5)
         }
     }) 
 }
@@ -360,6 +420,7 @@ function checkFlowers1(){
             var pos = flores1.indexOf(c1);
             flores1.splice(pos, 1);
             puntaje1 = puntaje1 + 1;
+            generatePts('+1',man1.x+23, man1.y-5)
         }
     }) 
 }
@@ -385,6 +446,7 @@ function checkChins1(){
             var pos = chinicuiles1.indexOf(c1);
             chinicuiles1.splice(pos, 1);
             puntaje1 = puntaje1 + 10;
+            generatePts('+10',man1.x+23, man1.y-5)
         }
     }) 
 }
@@ -410,6 +472,7 @@ function checkNopales1(){
             var pos = nopales1.indexOf(c1);
             nopales1.splice(pos, 1);
             puntaje1 = puntaje1 - 3;
+            generatePts('-3',man1.x+23, man1.y-5)
         }
     }) 
 }
@@ -435,6 +498,7 @@ function checkAves1(){
             var pos = aves1.indexOf(c1);
             aves1.splice(pos, 1);
             puntaje1 = puntaje1 - 5;
+            generatePts('-5',man1.x+23, man1.y-5)
         }
     }) 
 }
@@ -460,6 +524,7 @@ function checkAviones1(){
             var pos = aviones1.indexOf(c1);
             aviones1.splice(pos, 1);
             puntaje1 = puntaje1 - 20;
+            generatePts('-20',man1.x+23, man1.y-5)
         }
     }) 
 }
@@ -483,6 +548,7 @@ function gameOver(){
 window.onload = function() {
     tablero1.draw();
     document.getElementById('enter').innerHTML = 'Press Enter to start'
+    tablero1.drawControls()
 }
 
 addEventListener('keydown',function(e){ //recibe un evento (e)

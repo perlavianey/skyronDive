@@ -92,6 +92,9 @@ img{
     width:20%;
     height: 550px;
     justify-content: space-around;
+    background-color: rgba(246, 242, 247, 0.466);
+    opacity: 10%;
+    border-radius: 10px;
 }
 
 #time p:first-child{
@@ -99,6 +102,7 @@ img{
     margin-bottom: 10px;
     color:red;
     text-transform: uppercase;
+    text-decoration: underline;
 }
 
 #time p{
@@ -275,6 +279,9 @@ img{
     height: 550px;
     justify-content: space-around;
     margin: 10px;
+    background-color: rgba(246, 242, 247, 0.466);
+    opacity: 10%;
+    border-radius: 10px;
 }
 
 #time2 p:first-child{
@@ -282,6 +289,11 @@ img{
     margin-bottom: 10px;
     color:red;
     text-transform: uppercase;
+    text-decoration: underline;
+}
+
+.underline{
+    text-decoration: underline;
 }
 
 #time2 p{
