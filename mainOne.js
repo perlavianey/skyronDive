@@ -29,7 +29,8 @@ var audios = {
     end:'./audio/end.mp3',
     winner:'./audio/yuhuu.mp3',
     ave:'./audio/ave.mp3',
-    avion:'./audio/avion.mp3'
+    avion:'./audio/avion.mp3',
+    boo:'./audio/boo.mp3'
 }
 
 var calcetas1=[];
@@ -333,9 +334,16 @@ var man1 = new Man1()
         gameOver()
         document.getElementById('winner').innerHTML = 'Score: ' + puntaje1;
         
+        
         setTimeout(function(){ 
-            audioY.src = audios.winner
-            audioY.play()
+            if (puntaje1>0){
+                audioY.src = audios.winner
+                audioY.play()
+            }
+            else{
+                audioY.src = audios.boo
+                audioY.play()
+            }
         }, 1800);
     }
 }
