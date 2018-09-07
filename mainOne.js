@@ -39,7 +39,7 @@ var chinicuiles1=[];
 var nopales1=[];
 var aves1=[];
 var aviones1=[];
-var puntaje1=0;
+//var puntaje1=0;
 var puntajes=[]
 
 var audioFondo = new Audio() //Audio de fondo

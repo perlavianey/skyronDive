@@ -214,7 +214,7 @@ img{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 10%;
+    margin: 5%;
     margin-top: 7%;  
  }
   
@@ -312,4 +312,17 @@ img{
     font-size: 30px;
     margin-bottom: 0;
     color:brown;
+}
+
+footer p{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color:navy;
+}
+
+footer span{
+    color:rgb(199, 4, 4);
 }

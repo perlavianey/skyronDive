@@ -650,7 +650,6 @@ function start(){
 function generatePts(p, x, y){
     var pts = new Puntaje(p,x,y)
     puntajes.push(pts)
-    //pts.drawPuntaje(p,objeto.x,objeto.y);
 }
 
 function drawPts(){
@@ -665,9 +664,7 @@ function drawPts(){
 function generatePts2(p, x, y){
     var pts = new Puntaje2(p,x,y)
     puntajes.push(pts)
-    //pts.drawPuntaje(p,objeto.x,objeto.y);
 }
-
 
 //CALCETINES
 function generateSocks1(){
