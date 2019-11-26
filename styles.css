@@ -93,7 +93,6 @@ img{
     height: 550px;
     justify-content: space-around;
     background-color: rgba(246, 242, 247, 0.466);
-    opacity: 10%;
     border-radius: 10px;
 }
 
@@ -280,7 +279,6 @@ img{
     justify-content: space-around;
     margin: 10px;
     background-color: rgba(246, 242, 247, 0.466);
-    opacity: 10%;
     border-radius: 10px;
 }
 
